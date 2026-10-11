@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Volume2, VolumeX, Globe, Sparkles, MessageSquare, Send, Heart, ShieldAlert, Activity, UserCheck, Mic, MicOff } from "lucide-react";
-import { requestElevenLabsVoice } from "@/lib/api";
+import { apiUrl, requestElevenLabsVoice } from "@/lib/api";
 
 interface AICompanionAvatarProps {
   painScore: number;
@@ -244,7 +244,7 @@ export function AICompanionAvatar({
 
   const dispatchSpokenMessage = async (query: string) => {
     try {
-      const res = await fetch("http://localhost:8000/api/companion/converse", {
+      const res = await fetch(apiUrl("/api/companion/converse"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

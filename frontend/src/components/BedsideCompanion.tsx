@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Camera, CameraOff, Volume2, ShieldCheck, HeartPulse, RefreshCw, AlertCircle, Play, Eye, Sliders, CheckCircle2, Smile, Frown, Sparkles } from "lucide-react";
 import { FacialActionUnits } from "@/types";
+import { apiUrl } from "@/lib/api";
 import { anchorConsentOnSolana } from "@/lib/solana";
 
 interface BedsideCompanionProps {
@@ -266,7 +267,7 @@ export function BedsideCompanion({
         b64 = canvasRef.current.toDataURL("image/jpeg", 0.65);
       }
 
-      const res = await fetch("http://localhost:8000/api/gemini/vision-triage", {
+      const res = await fetch(apiUrl("/api/gemini/vision-triage"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

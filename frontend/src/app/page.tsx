@@ -13,6 +13,7 @@ import { SolanaAuditTrail } from "@/components/SolanaAuditTrail";
 import { SettingsModal } from "@/components/SettingsModal";
 import { CrossHospitalAlertBanner } from "@/components/CrossHospitalAlertBanner";
 import { SentinelState, SolanaAuditRecord } from "@/types";
+import { apiUrl } from "@/lib/api";
 import { useGeolocation } from "@/lib/useGeolocation";
 import { Sparkles, Calendar, ChevronDown, Activity, Heart, ShieldCheck } from "lucide-react";
 
@@ -74,11 +75,10 @@ export default function Home() {
   // Connect to SSE stream from FastAPI backend
   useEffect(() => {
     let eventSource: EventSource | null = null;
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
     const connectSSE = () => {
       try {
-        eventSource = new EventSource(`${apiUrl}/api/sentinel/stream`);
+        eventSource = new EventSource(apiUrl("/api/sentinel/stream"));
         eventSource.onmessage = (event) => {
           try {
             const data: SentinelState = JSON.parse(event.data);
