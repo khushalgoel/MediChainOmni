@@ -2,19 +2,7 @@ services:
   - type: web
     name: medichain-omni-backend
     runtime: python
+    plan: free
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
-    envVars:
-      - key: PORT
-        value: 8000
-      - key: GEMINI_API_KEY
-        sync: false
-      - key: ELEVENLABS_API_KEY
-        sync: false
-      - key: SNOWFLAKE_ACCOUNT
-        sync: false
-      - key: SNOWFLAKE_USER
-        sync: false
-      - key: SOLANA_NETWORK
-        value: devnet
