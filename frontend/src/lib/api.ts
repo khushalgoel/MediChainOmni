@@ -2,7 +2,9 @@ import { DiagnosticReport, SentinelState, SnowflakeVectorResult } from "@/types"
 
 const API_BASE_URL = (
   process.env.NEXT_PUBLIC_API_URL ||
-  (process.env.NODE_ENV === "development" ? "http://localhost:8000" : "")
+  (process.env.NODE_ENV === "development"
+    ? "http://localhost:8000"
+    : "https://medichain-omni-backend.onrender.com")
 ).replace(/\/+$/, "");
 
 export function apiUrl(path: string): string {
